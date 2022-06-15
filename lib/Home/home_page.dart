@@ -1,7 +1,5 @@
+import 'package:chat_app_ui/Home/chat_list.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-
-import '../Chat/chat_screen.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
@@ -14,12 +12,11 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   List chatlist = [
-    ChatList("Antonia Berger", "Lorem imp", "4min", 2),
-    ChatList("Antonia Berger", "Lorem imp", "4min", 2),
-    ChatList("Antonia Berger", "Lorem imp", "4min", 2),
-    ChatList("Antonia Berger", "Lorem imp", "4min", 2),
+    ChatList("Antonia Berger", "HI", "4min", 1, "hi"),
+    ChatList("Ben", "Hello", "4min", 2, "Hi"),
+    ChatList("Jhon", "How are you", "4min", 5, "Hi"),
+    ChatList("Samuel", "Need To Talk with you", "4min", 3, "Hi"),
   ];
-  List item = ["12", "21", "2", "2"];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,117 +39,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ],
           ),
         ),
-        SizedBox(
-          height: MediaQuery.of(context).size.height * 0.75,
-          child: ListView.separated(
-              itemBuilder: (_, index) {
-                return Dismissible(
-                  direction: DismissDirection.endToStart,
-                  key: ValueKey(chatlist.elementAt(index)),
-                  background: Container(
-                    // color: Colors.orangeAccent,
-                    decoration: const BoxDecoration(
-                        // color: Colors.orangeAccent,
-                        shape: BoxShape.rectangle,
-                        borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(20),
-                            bottomLeft: Radius.circular(20))),
-
-                    child: Padding(
-                      padding: const EdgeInsets.all(30),
-                      child: Container(
-                        decoration: const BoxDecoration(
-                            color: Colors.orangeAccent,
-                            shape: BoxShape.rectangle,
-                            borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(20),
-                                bottomLeft: Radius.circular(20))),
-                        padding: const EdgeInsets.all(10),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: const [
-                            Icon(
-                              Icons.close,
-                              color: Colors.white,
-                              size: 50,
-                            ),
-                            SizedBox(
-                              width: 50,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                  child: Padding(
-                      padding: const EdgeInsets.all(10),
-                      child: Card(
-                        elevation: 10,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30),
-                          side:
-                              const BorderSide(color: Colors.white70, width: 2),
-                        ),
-                        child: ListTile(
-                          onTap: () =>
-                              Get.to(() => ChatScreen(chatlist[index].name)),
-                          contentPadding: const EdgeInsets.symmetric(
-                              horizontal: 1, vertical: 20),
-                          leading: const CircleAvatar(
-                              radius: 40,
-                              backgroundImage: NetworkImage(
-                                  "https://cdn.onebauer.media/one/empire-images/features/560ec10750e6c513721c38f5/Up%20still.jpg?quality=50&width=1000&ratio=1-1&resizeStyle=aspectfit&format=jpg"),
-                              child: Text("")),
-                          title: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                chatlist[index].name,
-                                style: const TextStyle(
-                                    fontSize: 21, fontWeight: FontWeight.w400),
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              Text(chatlist[index].message),
-                            ],
-                          ),
-                          trailing: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 10),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                Text(
-                                  chatlist[index].minutes,
-                                  style: const TextStyle(
-                                      fontSize: 11,
-                                      fontWeight: FontWeight.w500),
-                                ),
-                                CircleAvatar(
-                                    radius: 10,
-                                    backgroundColor: Colors.orangeAccent,
-                                    child: Text(
-                                      chatlist[index].no.toString(),
-                                      style: const TextStyle(
-                                          fontSize: 9, color: Colors.white),
-                                    )),
-                              ],
-                            ),
-                          ),
-                        ),
-                      )),
-                );
-              },
-              separatorBuilder: (_, index) {
-                return const SizedBox(
-                  height: 10,
-                );
-              },
-              itemCount: chatlist.length),
-        )
+        MessageList(chatlist),
       ])),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
@@ -192,5 +79,6 @@ class ChatList {
   String message;
   String minutes;
   int no;
-  ChatList(this.name, this.message, this.minutes, this.no);
+  String mymessage;
+  ChatList(this.name, this.message, this.minutes, this.no, this.mymessage);
 }

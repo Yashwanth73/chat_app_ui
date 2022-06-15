@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const GetMaterialApp(
-      title: 'Flutter Demo',
+      title: 'Chat Demo APP',
       debugShowCheckedModeBanner: false,
       home: MyHomePage(title: 'Chat App Demo'),
     );
